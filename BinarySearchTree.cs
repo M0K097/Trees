@@ -42,6 +42,41 @@ public class BinarySearchTree
         Console.WriteLine("Depth-First: "+$"{root?.value}-" + string.Join("-", contentDepthFirst));
         TreeHelper.displayTree(root);
     }
+
+    public void deleteValue(int value)
+    {
+        delete(value,root);
+    }
+
+    private BstNode? delete(int value, BstNode? node)
+    {
+        if(node == null)
+            return node;
+        else if(value < node.value)
+            node.leftChild = delete(value, node.leftChild);
+        else if(value > node.value)
+            node.rightChild = delete(value, node.rightChild);
+        else
+        {
+            if(node.leftChild == null && node.rightChild == null)
+                node = null;
+            else if(node?.leftChild != null && node.rightChild == null)
+                node = node.leftChild;
+            else if(node?.leftChild == null && node?.rightChild != null)
+                node = node.rightChild;
+            else if (node?.leftChild != null && node.rightChild != null)
+            {
+                var predecessor = node.leftChild;
+                while(predecessor.leftChild != null)
+                {
+                    predecessor = predecessor.leftChild;
+                }
+                node.value = predecessor.value;
+                node.leftChild = delete(predecessor.value, node.leftChild);
+            }
+        }
+        return node;
+    }
     
 
 
