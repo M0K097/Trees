@@ -1,0 +1,7 @@
+﻿//AVL-Tree from scratch
+BinarySearchTree bst = new();
+
+List<int> values1 = new(){1,2,3};
+List<int> values2 = new(){5,10,30,50,1};
+bst.addRangeofValues(values2);
+bst.showTree();
