@@ -38,6 +38,20 @@ public static class TreeHelper
 
     }
 
+    public static void updateSingleNodeHeight(BstNode node)
+    {
+        int leftHeight = 0;
+        int rightHeight = 0;
+        if (node.leftChild != null)
+            leftHeight = node.leftChild.height;
+        if(node.rightChild != null)
+            rightHeight = node.rightChild.height;
+
+        node.height =  1 + Math.Max(leftHeight,rightHeight);
+        node.balanceFactor =  rightHeight - leftHeight;
+    }
+
+
     public static void displayTree(BstNode? node)
     {
         var structure = displayTreeStructure(node,0);
@@ -51,7 +65,7 @@ public static class TreeHelper
                 lastIter = content[0];
             }
 
-            Console.Write(content[1]+ $",");
+            Console.Write(content[1]+$"H[{content[2]-1}]B[{content[3]}]"+ $",");
         }
     }
     public static List<int> getValuesDepthSearch(BstNode? node)
@@ -68,18 +82,36 @@ public static class TreeHelper
        return res;
     }
 
+    public static void updateTreeBalance(BinarySearchTree tree)
+    {
+        calculateNodeHeight(tree.root);
+
+    }
+    public static int calculateNodeHeight(BstNode? node)
+    {
+        if(node == null)
+            return 0;
+        
+        int leftHeight = calculateNodeHeight(node.leftChild);
+        int rightHeight = calculateNodeHeight(node.rightChild);
+
+        node.height = 1 + Math.Max(leftHeight,rightHeight); 
+        node.balanceFactor = rightHeight - leftHeight;
+        return node.height;
+    }
+
     public static List<List<int>> displayTreeStructure(BstNode? node, int iter)
     {
        List<List<int>> res = new(); 
        if(node == null)
            return res;
        if( iter == 0 )
-           res.Add(new List<int>(){iter,node.value}); 
+           res.Add(new List<int>(){iter,node.value, node.height,node.balanceFactor}); 
        iter++;
        if(node.leftChild != null)
-           res.Add(new List<int>(){iter,node.leftChild.value});
+           res.Add(new List<int>(){iter,node.leftChild.value,node.leftChild.height,node.leftChild.balanceFactor});
        if(node.rightChild != null)
-           res.Add(new List<int>(){iter, node.rightChild.value});
+           res.Add(new List<int>(){iter, node.rightChild.value, node.rightChild.height, node.rightChild.balanceFactor});
 
        res.AddRange(displayTreeStructure(node.leftChild, iter));
        res.AddRange(displayTreeStructure(node.rightChild, iter));

@@ -12,3 +12,4 @@
 /home/m0k0/Desktop/AvlTree/obj/Debug/net8.0/AvlTree.pdb
 /home/m0k0/Desktop/AvlTree/obj/Debug/net8.0/AvlTree.genruntimeconfig.cache
 /home/m0k0/Desktop/AvlTree/obj/Debug/net8.0/ref/AvlTree.dll
+/home/m0k0/Desktop/AvlTree/obj/Debug/net8.0/AvlTree.sourcelink.json

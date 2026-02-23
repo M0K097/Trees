@@ -1,0 +1,22 @@
+public class AvlNode : BstNode
+{
+    public AvlNode(int value) : base(value) { }
+}
+
+public class AvlTree : BinarySearchTree
+{
+
+   public AvlNode insert(int value, AvlNode? node)
+    {
+        if (node == null)
+            node = new AvlNode(value);
+        else if (value < node.value)
+            node.leftChild = insert(value, node.leftChild);
+        else if (value > node.value)
+            node.rightChild = insert(value, node.rightChild);
+        
+        TreeHelper.updateSingleNodeHeight(node);
+        return node;
+    } 
+
+}

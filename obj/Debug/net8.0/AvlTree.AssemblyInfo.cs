@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AvlTree")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8ee46ac51f27a6d5ebefd533c0771e8931dd58ed")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9b567d151892e3f4b663933abced58b3de33dc52")]
 [assembly: System.Reflection.AssemblyProductAttribute("AvlTree")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AvlTree")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
