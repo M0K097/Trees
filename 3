@@ -95,6 +95,9 @@ public class BinarySearchTree
         Console.WriteLine("PreOrder: " + string.Join("-", contentPreOrder));
         var contentPostOrder = TreeHelper.getValuesPostOrder(root);
         Console.WriteLine("PostOrder: " + string.Join("-", contentPostOrder));
+        var contentDepthFirst = TreeHelper.getValuesDepthSearch(root);
+        Console.WriteLine("Depth-First: " + $"{root?.value}-" + string.Join("-", contentDepthFirst));
+        TreeHelper.displayTree(root);
     }
 
     public void deleteValue(int value)

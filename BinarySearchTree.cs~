@@ -21,7 +21,7 @@ public class BinarySearchTree
         root = insert(value, root);
     }
 
-    public virtual BstNode insert(int value, BstNode? node)
+    public virtual BstNode? insert(int value, BstNode? node)
     {
         if (node == null)
             node = new BstNode(value);
@@ -29,7 +29,62 @@ public class BinarySearchTree
             node.leftChild = insert(value, node.leftChild);
         else if (value > node.value)
             node.rightChild = insert(value, node.rightChild);
+        TreeHelper.updateSingleNodeHeight(node);
+        node = rebalance(node);
+        return node;
+    }
+    public BstNode? rotateRight(BstNode node)
+    {
+        var pivot = node.leftChild;
+        if (pivot != null)
+        {
+            node.leftChild = pivot.rightChild;
+            pivot.rightChild = node;
+            TreeHelper.updateSingleNodeHeight(node);
+            TreeHelper.updateSingleNodeHeight(pivot);
+        }
+        return pivot;
+    }
 
+    public BstNode? rotateLeft(BstNode node)
+    {
+        var pivot = node.rightChild;
+        if(pivot != null)
+        {
+            node.rightChild = pivot.leftChild;
+            pivot.leftChild = node;
+            TreeHelper.updateSingleNodeHeight(node);
+            TreeHelper.updateSingleNodeHeight(pivot);
+        }
+            return pivot;
+    }
+    public BstNode? rebalance(BstNode? node)
+    {
+        if (node == null)
+        {
+            return null;
+        }
+        else if(node.leftChild != null && node.balanceFactor < -1)
+        {
+            if(node.leftChild.balanceFactor < 0)
+                node = rotateRight(node);
+            else
+            {
+                node.leftChild = rotateLeft(node.leftChild);
+                node = rotateRight(node);
+            }
+
+        }
+        else if(node.rightChild != null && node.balanceFactor > 1)
+        {
+            if(node.rightChild.balanceFactor > 0)
+                node = rotateLeft(node);
+            else
+            {
+                node.rightChild = rotateRight(node.rightChild);
+                node = rotateLeft(node);
+            }
+        }
         return node;
     }
     public void showTree()
@@ -40,9 +95,6 @@ public class BinarySearchTree
         Console.WriteLine("PreOrder: " + string.Join("-", contentPreOrder));
         var contentPostOrder = TreeHelper.getValuesPostOrder(root);
         Console.WriteLine("PostOrder: " + string.Join("-", contentPostOrder));
-        var contentDepthFirst = TreeHelper.getValuesDepthSearch(root);
-        Console.WriteLine("Depth-First: " + $"{root?.value}-" + string.Join("-", contentDepthFirst));
-        TreeHelper.displayTree(root);
     }
 
     public void deleteValue(int value)
@@ -65,7 +117,7 @@ public class BinarySearchTree
             else if (node.rightChild == null)
                 return node.leftChild;
             else if (node.leftChild == null)
-                return  node.rightChild;
+                return node.rightChild;
             var predecessor = node.leftChild;
             while (predecessor.rightChild != null)
             {
@@ -74,6 +126,8 @@ public class BinarySearchTree
             node.value = predecessor.value;
             node.leftChild = delete(predecessor.value, node.leftChild);
         }
+        TreeHelper.updateSingleNodeHeight(node);
+        node = rebalance(node);
         return node;
     }
 
