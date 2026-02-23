@@ -46,7 +46,7 @@ public static class TreeHelper
             rightHeight = node.rightChild.height;
 
         node.height =  1 + Math.Max(leftHeight,rightHeight);
-        node.balanceFactor =  1+ rightHeight - leftHeight;
+        node.balanceFactor =  rightHeight - leftHeight;
     }
 
 

@@ -19,6 +19,7 @@ public class BinarySearchTree
     public void addValue(int value)
     {
         root = insert(value, root);
+        
     }
 
     public virtual BstNode? insert(int value, BstNode? node)
