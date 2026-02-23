@@ -35,10 +35,15 @@ public class BinarySearchTree
         var contentInOrder= TreeHelper.getValuesInOrder(root);
         Console.WriteLine("InOrder: " + string.Join("-",contentInOrder));
         var contentPreOrder= TreeHelper.getValuesPreOrder(root);
-        Console.WriteLine("PreOrder: " + string.Join("-",contentInOrder));
+        Console.WriteLine("PreOrder: " + string.Join("-",contentPreOrder));
         var contentPostOrder= TreeHelper.getValuesPostOrder(root);
         Console.WriteLine("InOrder: " + string.Join("-",contentPostOrder));
+        var contentDepthFirst = TreeHelper.getValuesDepthSearch(root);
+        Console.WriteLine("Depth-First: "+$"{root?.value}-" + string.Join("-", contentDepthFirst));
+        TreeHelper.displayTree(root);
     }
+    
+
 
     public void addRangeofValues(List<int> rangeOfValues)
     {
